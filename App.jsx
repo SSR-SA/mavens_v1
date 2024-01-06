@@ -31,12 +31,39 @@ const App = () => {
 
   if (!isLoggedIn) {
     return (
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <SafeAreaProvider>
+          <AuthProvider>
+            <NavigationContainer>
+              {/* <StatusBar backgroundColor="#111313" barStyle="light-content" /> */}
+              <Stack.Navigator
+                initialRouteName="Login"
+                screenOptions={{
+                  headerShown: false,
+                }}
+              >
+                <Stack.Screen name="Login" component={LoginPage} />
+                <Stack.Screen name="SignUp" component={SignUpPage} />
+                <Stack.Screen name="Main" component={MainScreen} />
+                {/* <Stack.Screen name="ForgetPassword" component={ForgotPasswordPage} />
+              <Stack.Screen name="ResetPassword" component={ResetPasswordPage} />
+              <Stack.Screen name="ProfileMenu" component={ProfileMenuPage} /> */}
+              </Stack.Navigator>
+            </NavigationContainer>
+          </AuthProvider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    );
+  }
+
+  // If logged in, show the main app content
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <AuthProvider>
           <NavigationContainer>
-            {/* <StatusBar backgroundColor="#111313" barStyle="light-content" /> */}
             <Stack.Navigator
-              initialRouteName="Login"
+              initialRouteName="Main"
               screenOptions={{
                 headerShown: false,
               }}
@@ -51,13 +78,6 @@ const App = () => {
           </NavigationContainer>
         </AuthProvider>
       </SafeAreaProvider>
-    );
-  }
-
-  // If logged in, show the main app content
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <MainScreen />
     </GestureHandlerRootView>
   );
 };
