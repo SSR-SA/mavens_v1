@@ -38,7 +38,7 @@ const LoginPage = ({ navigation }) => {
       }
       const response = await login({ email: email, password: password });
       if (response) {
-        navigation.navigate("Home");
+        navigation.navigate("Main");
       } else {
         alert("Login failed. Please check your credentials.");
       }

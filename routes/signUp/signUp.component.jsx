@@ -20,7 +20,7 @@ import {
   LoginButtonText,
   SignUpButton,
   SignUpButtonText,
-} from "./signupPage.styles";
+} from "./signUp.styles";
 
 const SignUpPage = ({ navigation }) => {
   const [email, setEmail] = useState("");

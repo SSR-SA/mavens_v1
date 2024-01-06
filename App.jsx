@@ -1,8 +1,16 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 import React, { useState, useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthProvider } from "./context/authContext";
 import LoginPage from "./routes/login/login.component.jsx";
-import HomeScreen from "./routes/home/home.component.jsx"; // Assuming this is the main content of your app
+import MainScreen from "./routes/main/main.component.jsx"; // Assuming this is the main content of your app
+import SignUpPage from "./routes/signUp/signUp.component.jsx";
+
+const Stack = createStackNavigator();
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,40 +29,35 @@ const App = () => {
     }
   };
 
-  const handleLogin = async (email, password) => {
-    try {
-      // Your actual login logic here
-      const response = await login({ email, password });
-
-      if (response && response.token) {
-        // Store the token securely using AsyncStorage
-        await AsyncStorage.setItem("userToken", response.token);
-
-        // Set the isLoggedIn state to true
-        setIsLoggedIn(true);
-      } else {
-        alert("Login failed. Please check your credentials.");
-      }
-    } catch (error) {
-      console.error("Login error:", error.message);
-      alert("An error occurred during login. Please try again.");
-    }
-  };
-
-  const handleLogout = async () => {
-    // Clear the stored token when the user logs out
-    await AsyncStorage.removeItem("userToken");
-    setIsLoggedIn(false);
-  };
-
   if (!isLoggedIn) {
-    return <LoginPage handleLogin={handleLogin} />;
+    return (
+      <SafeAreaProvider>
+        <AuthProvider>
+          <NavigationContainer>
+            {/* <StatusBar backgroundColor="#111313" barStyle="light-content" /> */}
+            <Stack.Navigator
+              initialRouteName="Login"
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="Login" component={LoginPage} />
+              <Stack.Screen name="SignUp" component={SignUpPage} />
+              <Stack.Screen name="Main" component={MainScreen} />
+              {/* <Stack.Screen name="ForgetPassword" component={ForgotPasswordPage} />
+              <Stack.Screen name="ResetPassword" component={ResetPasswordPage} />
+              <Stack.Screen name="ProfileMenu" component={ProfileMenuPage} /> */}
+            </Stack.Navigator>
+          </NavigationContainer>
+        </AuthProvider>
+      </SafeAreaProvider>
+    );
   }
 
   // If logged in, show the main app content
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <HomeScreen handleLogout={handleLogout} />
+      <MainScreen />
     </GestureHandlerRootView>
   );
 };

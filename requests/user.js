@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.BASE_URL;
+axios.defaults.baseURL = "http://192.168.0.11:8000";
 
 export const userLogin = async (payload) => {
   try {

@@ -12,7 +12,7 @@ const Tabs = createBottomTabNavigator();
 
 const MainScreen = () => {
   return (
-    <NavigationContainer>
+    <>
       <Tabs.Navigator
         screenOptions={{
           headerShown: false,
@@ -41,7 +41,7 @@ const MainScreen = () => {
           options={{ tabBarIcon: () => <Ionicons name="cog-outline" size={25} /> }}
         />
       </Tabs.Navigator>
-    </NavigationContainer>
+    </>
   );
 };
 
