@@ -27,6 +27,7 @@ const BecomeTeacherPage = ({navigation}) => {
 	const [techStack, setTechStack] = useState('');
 	const [motivationalReason, setMotivationalReason] = useState('');
 	const [latestRequest, setLatestRequest] = useState('');
+	const [statusColor, setStatusColor] = useState('');
 	const {token} = useAuth();
 
 	const handleBecomeTeacherRequest = async () => {
@@ -37,12 +38,28 @@ const BecomeTeacherPage = ({navigation}) => {
 		});
 		if (response) {
 			setLatestRequest(response);
+			setStatusColor('#292929');
 		}
 	};
 
-	useEffect(async () => {
-		const latest = await GetLatestRequest(token);
-		setLatestRequest(latest);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const latest = await GetLatestRequest(token);
+				setLatestRequest(latest);
+				if (latest.status === 'pending') {
+					setStatusColor('#292929');
+				} else if (latest.status === 'accepted') {
+					setStatusColor('green');
+				} else if (latest.status === 'declined') {
+					setStatusColor('red');
+				}
+			} catch (error) {
+				console.error('Error fetching latest request:', error);
+			}
+		};
+
+		fetchData();
 	}, []);
 
 	return (
@@ -53,13 +70,12 @@ const BecomeTeacherPage = ({navigation}) => {
 						<Title>Become a Teacher</Title>
 					</TitleContainer>
 
-					{latestRequest && (
-						<LatestRequestRow>
-							<LatestRequestText>
-								Latest Request Status: {latestRequest.status}
-							</LatestRequestText>
-						</LatestRequestRow>
-					)}
+					<LatestRequestRow style={{backgroundColor: statusColor}}>
+						<LatestRequestText>
+							Latest Request Status:{' '}
+							{latestRequest ? latestRequest.status : 'None'}
+						</LatestRequestText>
+					</LatestRequestRow>
 					<InputContainer>
 						<Input
 							placeholder="Years of Experience"

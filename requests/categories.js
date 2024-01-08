@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://192.168.1.56:8000';
+axios.defaults.baseURL = process.env.BASE_URL;
 
 export const GetCategories = async (token) => {
 	try {
