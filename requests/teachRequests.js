@@ -4,13 +4,11 @@ axios.defaults.baseURL = process.env.BASE_URL;
 
 export const GetLatestRequest = async (token) => {
 	try {
-		console.log(token);
 		const response = await axios.get(`/api/teach-request/latest`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		console.log('response data:', response.data);
 		if (response.status === 200) {
 			return response.data;
 		} else {
@@ -23,13 +21,11 @@ export const GetLatestRequest = async (token) => {
 
 export const GetTeachRequests = async (token) => {
 	try {
-		console.log(token);
 		const response = await axios.get(`/api/teach-request`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		console.log('response data:', response.data);
 		if (response.status === 200) {
 			return response.data;
 		} else {
