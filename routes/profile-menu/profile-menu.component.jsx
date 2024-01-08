@@ -29,12 +29,8 @@ const ProfileMenuPage = ({navigation}) => {
 			<ProfileContainer>
 				<ProfileTop>
 					<ProfileInfoContainer>
-						<ProfileInfoText>{`${
-							user.firstName ? user.firstName : ''
-						}`}</ProfileInfoText>
-						<ProfileInfoText>{`${
-							user.lastName ? user.lastName : ''
-						}`}</ProfileInfoText>
+						<ProfileInfoText>{`${user ? user.firstName : ''}`}</ProfileInfoText>
+						<ProfileInfoText>{`${user ? user.lastName : ''}`}</ProfileInfoText>
 						<ProfileInfoText>{user.email ? user.email : ''}</ProfileInfoText>
 					</ProfileInfoContainer>
 

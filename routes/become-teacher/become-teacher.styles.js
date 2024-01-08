@@ -97,3 +97,16 @@ export const BackToLoginButtonText = styled.Text`
 	color: #6b6b6b;
 	font-size: 16px;
 `;
+
+export const LatestRequestRow = styled.View`
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #292929;
+	border-radius: 5px;
+	align-items: center;
+`;
+
+export const LatestRequestText = styled.Text`
+	color: #fcf9ff;
+	font-size: 14px;
+`;
