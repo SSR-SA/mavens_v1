@@ -1,32 +1,32 @@
-import ContinueLearningCardContainerData from "./ContinueLearningCardContainerData";
-import ContinueLearningnCard from "../continueLearningCard/continueLearningCard.component";
+import ContinueLearningnCard from '../continueLearningCard/continueLearningCard.component';
 import {
-  ContinueLearningSectionContainer,
-  Header,
-  Title,
-  SeeAll,
-  ContinueLearningCardContainer,
-} from "./continueLearningSection.styles";
+	ContinueLearningSectionContainer,
+	Header,
+	Title,
+	SeeAll,
+	ContinueLearningCardContainer,
+} from './continueLearningSection.styles';
 
-const ContinueLearningSection = () => {
-  return (
-    <ContinueLearningSectionContainer>
-      <Header>
-        <Title>Continue Learning</Title>
-        <SeeAll>See All</SeeAll>
-      </Header>
-      <ContinueLearningCardContainer>
-        {ContinueLearningCardContainerData.map((item) => (
-          <ContinueLearningnCard
-            key={item.id}
-            image={item.image}
-            course={item.course}
-            creator={item.creator}
-          />
-        ))}
-      </ContinueLearningCardContainer>
-    </ContinueLearningSectionContainer>
-  );
+const ContinueLearningSection = ({cardsData}) => {
+	return (
+		<ContinueLearningSectionContainer>
+			<Header>
+				<Title>Continue Learning</Title>
+				<SeeAll>See All</SeeAll>
+			</Header>
+
+			<ContinueLearningCardContainer>
+				{cardsData.map((item) => (
+					<ContinueLearningnCard
+						key={item._id}
+						image={item.imageUrl}
+						course={item.title}
+						creator={`${item.createdBy.firstName} ${item.createdBy.lastName}`}
+					/>
+				))}
+			</ContinueLearningCardContainer>
+		</ContinueLearningSectionContainer>
+	);
 };
 
 export default ContinueLearningSection;
