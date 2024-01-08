@@ -21,6 +21,25 @@ export const GetLatestRequest = async (token) => {
 	}
 };
 
+export const GetTeachRequests = async (token) => {
+	try {
+		console.log(token);
+		const response = await axios.get(`/api/teach-request`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		console.log('response data:', response.data);
+		if (response.status === 200) {
+			return response.data;
+		} else {
+			throw new Error(`Unexpected response status: ${response.status}`);
+		}
+	} catch (error) {
+		throw error;
+	}
+};
+
 export const PostTeachRequest = async (token, payload) => {
 	try {
 		const response = await axios.post('/api/teach-request', payload, {

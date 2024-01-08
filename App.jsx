@@ -14,6 +14,7 @@ import ResetPasswordPage from './routes/reset-password/reset-password.component.
 import ProfileMenuPage from './routes/profile-menu/profile-menu.component.jsx';
 import SettingsPage from './routes/settings/settings.component.jsx';
 import BecomeTeacherPage from './routes/become-teacher/become-teacher.component.jsx';
+import ManageRequestsPage from './routes/manage-requests/manage-requests.component.jsx';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -50,6 +51,10 @@ const App = () => {
 								<Stack.Screen name="ProfileMenu" component={ProfileMenuPage} />
 								<Stack.Screen name="Settings" component={SettingsPage} />
 								<Stack.Screen
+									name="ManageRequests"
+									component={ManageRequestsPage}
+								/>
+								<Stack.Screen
 									name="BecomeTeacher"
 									component={BecomeTeacherPage}
 								/>
@@ -79,6 +84,10 @@ const App = () => {
 							<Stack.Screen name="Forget" component={ForgotPasswordPage} />
 							<Stack.Screen name="Reset" component={ResetPasswordPage} />
 							<Stack.Screen name="ProfileMenu" component={ProfileMenuPage} />
+							<Stack.Screen
+								name="ManageRequests"
+								component={ManageRequestsPage}
+							/>
 							<Stack.Screen
 								name="BecomeTeacher"
 								component={BecomeTeacherPage}

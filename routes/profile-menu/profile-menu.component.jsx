@@ -29,9 +29,9 @@ const ProfileMenuPage = ({navigation}) => {
 			<ProfileContainer>
 				<ProfileTop>
 					<ProfileInfoContainer>
-						<ProfileInfoText>{`${user ? user.firstName : ''}`}</ProfileInfoText>
-						<ProfileInfoText>{`${user ? user.lastName : ''}`}</ProfileInfoText>
-						<ProfileInfoText>{user.email ? user.email : ''}</ProfileInfoText>
+						<ProfileInfoText>{user ? user.firstName : ''}</ProfileInfoText>
+						<ProfileInfoText>{user ? user.lastName : ''}</ProfileInfoText>
+						<ProfileInfoText>{user ? user.email : ''}</ProfileInfoText>
 					</ProfileInfoContainer>
 
 					<ProfileSectionContainer>
@@ -39,8 +39,10 @@ const ProfileMenuPage = ({navigation}) => {
 						<SectionText>{'Profile'}</SectionText>
 					</ProfileSectionContainer>
 
-					{user.role === 'admin' ? (
-						<ProfileSectionContainer>
+					{user?.role === 'admin' ? (
+						<ProfileSectionContainer
+							onPress={() => navigation.navigate('ManageRequests')}
+						>
 							<FontAwesome5
 								name={'chalkboard-teacher'}
 								size={24}
