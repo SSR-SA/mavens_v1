@@ -12,7 +12,11 @@ import {
 	DeclineButton,
 	ButtonText,
 } from './manage-requests.styles';
-import {GetTeachRequests} from '../../requests/teachRequests';
+import {
+	AcceptTeachRequest,
+	DeclineTeachRequest,
+	GetTeachRequests,
+} from '../../requests/teachRequests';
 import {useAuth} from '../../context/authContext';
 
 const ManageRequestsPage = () => {
@@ -31,9 +35,27 @@ const ManageRequestsPage = () => {
 		fetchApplications();
 	}, []);
 
-	const handleAccept = async (applicationId) => {};
+	const handleAccept = async (applicationId) => {
+		const accept = AcceptTeachRequest(token, applicationId);
 
-	const handleDecline = async (applicationId) => {};
+		if (accept) {
+			const updatedApplications = teacherApplications.filter(
+				(appl) => appl._id !== applicationId
+			);
+			setTeacherApplications(updatedApplications);
+		}
+	};
+
+	const handleDecline = async (applicationId) => {
+		const decline = DeclineTeachRequest(token, applicationId);
+
+		if (decline) {
+			const updatedApplications = teacherApplications.filter(
+				(appl) => appl._id !== applicationId
+			);
+			setTeacherApplications(updatedApplications);
+		}
+	};
 
 	return (
 		<Container>
@@ -51,10 +73,10 @@ const ManageRequestsPage = () => {
 						<RequestText>Skills: {application.skills}</RequestText>
 						<RequestText>Motivation: {application.description}</RequestText>
 						<ButtonContainer>
-							<AcceptButton onPress={() => handleAccept(application.id)}>
+							<AcceptButton onPress={() => handleAccept(application._id)}>
 								<ButtonText>Accept</ButtonText>
 							</AcceptButton>
-							<DeclineButton onPress={() => handleDecline(application.id)}>
+							<DeclineButton onPress={() => handleDecline(application._id)}>
 								<ButtonText>Decline</ButtonText>
 							</DeclineButton>
 						</ButtonContainer>

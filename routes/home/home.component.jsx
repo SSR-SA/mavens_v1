@@ -32,7 +32,7 @@ const HomePage = ({navigation}) => {
 		};
 
 		fetchData();
-	}, []);
+	}, [token]);
 
 	return (
 		<Container>
