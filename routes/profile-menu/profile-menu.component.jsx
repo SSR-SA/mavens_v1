@@ -34,7 +34,9 @@ const ProfileMenuPage = ({navigation}) => {
 						<ProfileInfoText>{user ? user.email : ''}</ProfileInfoText>
 					</ProfileInfoContainer>
 
-					<ProfileSectionContainer>
+					<ProfileSectionContainer
+						onPress={() => navigation.navigate('Profile')}
+					>
 						<FontAwesome5 name={'user'} size={24} color="#fcf9ff" />
 						<SectionText>{'Profile'}</SectionText>
 					</ProfileSectionContainer>
