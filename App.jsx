@@ -69,7 +69,6 @@ const App = () => {
 		);
 	}
 
-	// If logged in, show the main app content
 	return (
 		<GestureHandlerRootView style={{flex: 1}}>
 			<SafeAreaProvider>
@@ -87,6 +86,7 @@ const App = () => {
 							<Stack.Screen name="Forget" component={ForgotPasswordPage} />
 							<Stack.Screen name="Reset" component={ResetPasswordPage} />
 							<Stack.Screen name="ProfileMenu" component={ProfileMenuPage} />
+							<Stack.Screen name="Settings" component={SettingsPage} />
 							<Stack.Screen name="Profile" component={ProfilePage} />
 							<Stack.Screen
 								name="ManageRequests"
