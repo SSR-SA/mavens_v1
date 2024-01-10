@@ -1,4 +1,4 @@
-// Add these imports at the beginning of your styled-components file
+// chat.styles.js
 import styled from 'styled-components/native';
 
 export const UserList = styled.ScrollView`
@@ -7,7 +7,7 @@ export const UserList = styled.ScrollView`
 	padding: 20px;
 `;
 
-export const ChatContainer = styled.ScrollView`
+export const ChatContainer = styled.View`
 	flex: 1;
 	width: 100%;
 	padding: 20px;
@@ -88,11 +88,68 @@ export const UserRole = styled.Text`
 export const UserLastLogin = styled.Text`
 	font-size: 14px;
 	color: #fcf9ff;
-	align-self: flex-end; /* Aligns to the right */
+	align-self: flex-end;
 `;
 
 export const UserRoleLoginContainer = styled.View`
 	flex: 1;
 	flex-direction: row;
 	justify-content: space-between;
+`;
+
+// Additional styled components for ChatScreen
+export const ChatHeader = styled.Text`
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 16px;
+`;
+export const ChatMessagesContainer = styled.ScrollView`
+	flex: 1;
+	width: 100%;
+	height: 90%;
+	margin-bottom: 16px;
+	padding: 0 16px;
+`;
+
+export const ChatMessageContainer = styled.View`
+	flex-direction: ${({sender}) => (sender === 'user' ? 'row-reverse' : 'row')};
+	margin-bottom: 8px;
+`;
+
+export const ChatMessageBubble = styled.View`
+	background-color: ${({sender}) =>
+		sender === 'user' ? '#388e3c' : '#1976D2'};
+	padding: 8px;
+	border-radius: 8px;
+	max-width: 70%; /* Added to limit message bubble width */
+`;
+
+export const ChatMessageText = styled.Text`
+	color: white;
+`;
+
+export const ChatInputContainer = styled.View`
+	flex-direction: row;
+	margin-top: 16px;
+	align-items: center; /* Centering items horizontally */
+`;
+
+export const ChatTextInput = styled.TextInput`
+	flex: 1;
+	border-width: 1px;
+	padding: 8px;
+	margin-right: 8px;
+	border-radius: 8px;
+	background-color: #fcf9ff;
+`;
+
+export const SendButton = styled.TouchableOpacity`
+	background-color: #1976d2;
+	padding: 8px;
+	border-radius: 8px;
+	justify-content: center;
+`;
+
+export const SendButtonText = styled.Text`
+	color: white;
 `;

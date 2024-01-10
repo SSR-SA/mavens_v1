@@ -16,6 +16,8 @@ import SettingsPage from './routes/settings/settings.component.jsx';
 import BecomeTeacherPage from './routes/become-teacher/become-teacher.component.jsx';
 import ManageRequestsPage from './routes/manage-requests/manage-requests.component.jsx';
 import ProfilePage from './routes/profile-page/profile-page.component.jsx';
+import ChatPage from './routes/chat/chat.component.jsx';
+import ChatScreenPage from './routes/chat-screen/chat-screen.component.jsx';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -52,7 +54,8 @@ const App = () => {
 								<Stack.Screen name="ProfileMenu" component={ProfileMenuPage} />
 								<Stack.Screen name="Settings" component={SettingsPage} />
 								<Stack.Screen name="Profile" component={ProfilePage} />
-
+								<Stack.Screen name="Chat" component={ChatPage} />
+								<Stack.Screen name="ChatScreen" component={ChatScreenPage} />
 								<Stack.Screen
 									name="ManageRequests"
 									component={ManageRequestsPage}
@@ -88,6 +91,8 @@ const App = () => {
 							<Stack.Screen name="ProfileMenu" component={ProfileMenuPage} />
 							<Stack.Screen name="Settings" component={SettingsPage} />
 							<Stack.Screen name="Profile" component={ProfilePage} />
+							<Stack.Screen name="Chat" component={ChatPage} />
+							<Stack.Screen name="ChatScreen" component={ChatScreenPage} />
 							<Stack.Screen
 								name="ManageRequests"
 								component={ManageRequestsPage}
