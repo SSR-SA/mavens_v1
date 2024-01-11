@@ -1,12 +1,12 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {NavigationContainer} from '@react-navigation/native';
 import HomePage from '../home/home.component.jsx';
 import AboutPage from '../about/about.component.jsx';
 import ChatPage from '../chat/chat.component.jsx';
 import SettingsPage from '../settings/settings.component.jsx';
 
 import {tabBarStyle} from './main.styles.js';
+import {useFocusEffect} from '@react-navigation/native';
 
 const Tabs = createBottomTabNavigator();
 
@@ -45,7 +45,7 @@ const MainScreen = ({navigation}) => {
 					name="Settings"
 					component={SettingsPage}
 					options={{
-						tabBarIcon: () => <Ionicons name="cog-outline" size={25} />,
+						tabBarIcon: () => <Ionicons name="people-outline" size={25} />,
 					}}
 				/>
 			</Tabs.Navigator>

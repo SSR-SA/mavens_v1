@@ -8,7 +8,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {GetCategories} from '../../requests/categories';
 import {useAuth} from '../../context/authContext';
 import {GetCourses} from '../../requests/courses';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {statusUpdater} from '../../requests/user';
+import {useFocusEffect} from '@react-navigation/native';
 
 const HomePage = ({navigation}) => {
 	const [courseData, setCourseData] = useState([]);
@@ -16,24 +18,46 @@ const HomePage = ({navigation}) => {
 	const {token, user} = useAuth();
 
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchData = async (token) => {
 			try {
 				if (token) {
-					const res = await GetCourses(token, {});
-					res ? setCourseData(res) : alert('Failed to get data');
-
 					const catres = await GetCategories(token, {});
-					catres ? setCategories(catres) : alert('Failed to get data');
+					catres ? setCategories(catres) : setCategories([]);
 				}
 			} catch (error) {
 				console.error('Error fetching courses:', error.message);
 				alert('An error occurred while fetching data. Please try again.');
 			}
 		};
+		const startOnlineStatusUpdater = (token) => {
+			const intervalId = setInterval(() => {
+				statusUpdater(token);
+			}, 5000);
+			return () => clearInterval(intervalId);
+		};
 
-		fetchData();
+		if (token) {
+			startOnlineStatusUpdater(token);
+			fetchData(token);
+		}
 	}, [token]);
 
+	useFocusEffect(
+		React.useCallback(() => {
+			const fetchData = async () => {
+				try {
+					if (token) {
+						const res = await GetCourses(token, {});
+						res ? setCourseData(res) : setCourseData([]);
+					}
+				} catch (error) {
+					alert('An error occurred while fetching data. Please try again.');
+				}
+			};
+
+			fetchData();
+		}, [token])
+	);
 	return (
 		<Container>
 			<SafeAreaView>

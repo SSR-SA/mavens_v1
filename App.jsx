@@ -5,7 +5,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import React, {useState, useEffect} from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {AuthProvider} from './context/authContext';
+import {AuthProvider, useAuth} from './context/authContext';
 import LoginPage from './routes/login/login.component.jsx';
 import MainScreen from './routes/main/main.component.jsx';
 import SignUpPage from './routes/signUp/signUp.component.jsx';
@@ -18,11 +18,11 @@ import ManageRequestsPage from './routes/manage-requests/manage-requests.compone
 import ProfilePage from './routes/profile-page/profile-page.component.jsx';
 import ChatPage from './routes/chat/chat.component.jsx';
 import ChatScreenPage from './routes/chat-screen/chat-screen.component.jsx';
+import UserBrowserPage from './routes/users/user-browser.component.jsx';
 const Stack = createStackNavigator();
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 	useEffect(() => {
 		checkLoginStatus();
 	}, []);
@@ -56,6 +56,7 @@ const App = () => {
 								<Stack.Screen name="Profile" component={ProfilePage} />
 								<Stack.Screen name="Chat" component={ChatPage} />
 								<Stack.Screen name="ChatScreen" component={ChatScreenPage} />
+								<Stack.Screen name="UserBrowser" component={UserBrowserPage} />
 								<Stack.Screen
 									name="ManageRequests"
 									component={ManageRequestsPage}
@@ -93,6 +94,8 @@ const App = () => {
 							<Stack.Screen name="Profile" component={ProfilePage} />
 							<Stack.Screen name="Chat" component={ChatPage} />
 							<Stack.Screen name="ChatScreen" component={ChatScreenPage} />
+							<Stack.Screen name="UserBrowser" component={UserBrowserPage} />
+
 							<Stack.Screen
 								name="ManageRequests"
 								component={ManageRequestsPage}

@@ -54,3 +54,46 @@ export const resetpassword = async (payload) => {
 		throw error;
 	}
 };
+export const getUsers = async (token, searchText) => {
+	try {
+		const response = await axios.get(`/api/user`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		if (response.status === 201 || response.status === 200) {
+			return response.data.data;
+		} else {
+			throw new Error(`Unexpected response status: ${response.status}`);
+		}
+	} catch (error) {
+		throw error;
+	}
+};
+export const statusUpdater = async (token) => {
+	try {
+		await axios.post(`/api/user/online`, null, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const getUserById = async (token, id) => {
+	try {
+		const response = await axios.get(`/api/user/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		if (response) {
+			return response.data.data;
+		}
+	} catch (error) {
+		throw error;
+	}
+};

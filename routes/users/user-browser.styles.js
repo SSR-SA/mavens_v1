@@ -1,54 +1,26 @@
-// Add these imports at the beginning of your styled-components file
 import styled from 'styled-components/native';
-
-export const UserList = styled.ScrollView`
-	flex: 1;
-	width: 100%;
-	padding: 10px;
-`;
-
-export const ChatContainer = styled.ScrollView`
-	flex: 1;
-	width: 100%;
-	padding: 20px;
-`;
 
 export const Container = styled.View`
 	flex: 1;
 	background-color: #111313;
-	padding: 0 0px;
-	padding-top: 30px;
+	padding: 30px;
 	align-items: center;
 	justify-content: space-between;
 `;
 
-export const ContainerTop = styled.View`
-	flex-direction: row;
-	align-items: center;
+export const SearchBar = styled.TextInput`
 	width: 100%;
-	margin-bottom: 20px;
-	justify-content: flex-end;
-`;
-
-export const ContainerBottom = styled.View`
-	align-items: center;
-	width: 100%;
-	flex: 1;
-`;
-
-export const TitleContainer = styled.View`
-	align-items: center;
-	width: 80%;
-	margin-bottom: 10px;
-`;
-
-export const Title = styled.Text`
-	font-size: 30px;
+	height: 40px;
+	background-color: #292929;
 	color: #fcf9ff;
-	text-align: center;
+	padding: 10px;
+	margin-bottom: 20px;
+	border-radius: 5px;
 `;
-export const ButtonContainer = styled.TouchableOpacity`
-	padding-right: 20px;
+
+export const UserList = styled.FlatList`
+	flex: 1;
+	width: 100%;
 `;
 
 export const UserListItem = styled.TouchableOpacity`
@@ -58,12 +30,6 @@ export const UserListItem = styled.TouchableOpacity`
 	padding: 10px;
 	margin-bottom: 10px;
 	border-radius: 5px;
-`;
-
-export const Line = styled.View`
-	background-color: #ff0000;
-	width: 100%;
-	height: 1px;
 `;
 
 export const UserProfileImage = styled.Image`
@@ -106,4 +72,25 @@ export const UserRoleLoginContainer = styled.View`
 	flex: 1;
 	flex-direction: row;
 	justify-content: space-between;
+`;
+
+export const StartChatButton = styled.TouchableOpacity`
+	background-color: #1976d2;
+	padding: 10px;
+	border-radius: 5px;
+	align-items: center;
+	margin-top: 20px;
+`;
+
+export const StartChatButtonText = styled.Text`
+	color: #fcf9ff;
+	font-size: 18px;
+	font-weight: bold;
+`;
+
+export const IoniconButton = styled.TouchableOpacity`
+	padding: 8px;
+	border-radius: 5px;
+	background-color: #1976d2;
+	margin-left: 10px;
 `;

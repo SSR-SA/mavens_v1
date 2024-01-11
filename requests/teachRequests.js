@@ -80,8 +80,6 @@ export const AcceptTeachRequest = async (token, id) => {
 
 export const DeclineTeachRequest = async (token, id) => {
 	try {
-		console.log(token);
-		console.log(id);
 		const response = await axios.patch(
 			`/api/teach-request/decline/${id}`,
 			null,

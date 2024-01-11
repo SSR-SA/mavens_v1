@@ -33,6 +33,7 @@ export const AuthProvider = ({children}) => {
 
 			setUser(response);
 			setToken(response.token);
+
 			return response;
 		} catch (error) {
 			console.error('Login error:', error.message);

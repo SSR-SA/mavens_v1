@@ -1,8 +1,8 @@
-// ChatScreen.js
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
 	Container,
-	ChatHeader,
+	UserName,
+	UserDetails,
 	ChatMessagesContainer,
 	ChatMessageContainer,
 	ChatMessageBubble,
@@ -11,53 +11,124 @@ import {
 	ChatTextInput,
 	SendButton,
 	SendButtonText,
+	UserProfileImage,
+	ContainerTop,
+	MessageContainer,
+	UserLastLogin,
 } from './chat-screen.styles';
+import {useAuth} from '../../context/authContext';
+import {getMessages, sendMessage} from '../../requests/messages';
+import {useFocusEffect, useRoute} from '@react-navigation/native';
+import {formatDistanceToNow} from 'date-fns';
+import {getUserById} from '../../requests/user';
 
-const ChatScreen = () => {
-	const [messages, setMessages] = useState([
-		{id: 1, text: 'Hello!', sender: 'user'},
-		{id: 2, text: 'Hi there!', sender: 'otherUser'},
-		{id: 3, text: 'How are you?', sender: 'user'},
-		{id: 4, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 5, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 6, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 7, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 8, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 9, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 10, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 11, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 12, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 13, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 14, text: "I'm good, thanks!", sender: 'otherUser'},
-		{id: 15, text: 'How are you?', sender: 'user'},
-		{id: 16, text: 'How are you?', sender: 'user'},
-		{id: 17, text: 'How are you?', sender: 'user'},
-		{id: 18, text: 'How are you?', sender: 'user'},
-		{id: 19, text: 'How are you?', sender: 'user'},
-	]);
+export const formatLastLogin = (lastLogin) => {
+	try {
+		const loginDate = new Date(lastLogin);
+
+		const distanceToNow = formatDistanceToNow(loginDate, {addSuffix: true});
+
+		if (distanceToNow.includes('ago')) {
+			return distanceToNow;
+		} else {
+			return loginDate.toLocaleDateString();
+		}
+	} catch (err) {
+		return '';
+	}
+};
+
+const ChatScreen = ({navigation}) => {
+	const [messages, setMessages] = useState([]);
+	const [sendToUser, setSendToUser] = useState('');
 	const [newMessage, setNewMessage] = useState('');
+	const {user, token} = useAuth();
+	const route = useRoute();
+	const {sendTo} = route.params;
 
-	const handleSend = () => {
-		if (newMessage.trim() !== '') {
-			setMessages([
-				...messages,
-				{id: messages.length + 1, text: newMessage, sender: 'user'},
-			]);
-			setNewMessage('');
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				setSendToUser(sendTo);
+				const users = [sendTo._id, user._id];
+				const result = await getMessages(token, users);
+				setMessages(result);
+			} catch (error) {
+				console.error('Error fetching data:', error.message);
+			}
+		};
+
+		if (sendTo) {
+			fetchData();
+		}
+	}, [sendTo]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				if (sendToUser !== '') {
+					const userResult = await getUserById(token, sendToUser._id);
+					setSendToUser(userResult);
+				}
+
+				const users = [sendToUser._id, user._id];
+				const result = await getMessages(token, users);
+				setMessages(result);
+			} catch (error) {
+				console.error('Error fetching data:', error.message);
+			}
+		};
+
+		const intervalId = setInterval(() => {
+			if (token && sendToUser !== '') {
+				fetchData();
+			}
+		}, 3000);
+
+		return () => clearInterval(intervalId);
+	}, [token, sendToUser, user._id]);
+
+	const handleSend = async () => {
+		const payload = {text: newMessage, users: [user._id, sendToUser._id]};
+		const sentMessage = await sendMessage(token, payload);
+
+		if (sentMessage) {
+			if (newMessage.trim() !== '') {
+				setMessages([...messages, sentMessage]);
+				setNewMessage('');
+			}
 		}
 	};
 
 	return (
 		<Container>
-			<ChatHeader>Chatting with {'Baydete'}</ChatHeader>
+			<ContainerTop>
+				<UserProfileImage source={{uri: sendToUser.profileImage}} />
+				<UserDetails>
+					<UserName>
+						{sendToUser.firstName} {sendToUser.lastName}
+					</UserName>
+					<UserLastLogin>
+						{sendToUser?.isOnline
+							? 'Online'
+							: formatLastLogin(sendToUser.lastLogin)}
+					</UserLastLogin>
+				</UserDetails>
+			</ContainerTop>
 			<ChatMessagesContainer>
-				{messages.map((message) => (
-					<ChatMessageContainer key={message.id} sender={message.sender}>
-						<ChatMessageBubble sender={message.sender}>
-							<ChatMessageText>{message.text}</ChatMessageText>
-						</ChatMessageBubble>
-					</ChatMessageContainer>
-				))}
+				<MessageContainer>
+					{messages.map((message) => (
+						<ChatMessageContainer
+							key={message._id}
+							sender={message.sender}
+							user={user._id}
+						>
+							<ChatMessageBubble sender={message.sender} user={user._id}>
+								<ChatMessageText>{message.text}</ChatMessageText>
+							</ChatMessageBubble>
+						</ChatMessageContainer>
+					))}
+				</MessageContainer>
 			</ChatMessagesContainer>
 			<ChatInputContainer>
 				<ChatTextInput
