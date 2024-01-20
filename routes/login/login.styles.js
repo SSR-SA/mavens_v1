@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { ReactComponent as mLogo } from "../../assets/mLogo.svg";
+import { Image } from "react-native";
 
 export const Container = styled.View`
   flex: 1;
@@ -14,6 +14,7 @@ export const ContainerTop = styled.View`
   flex: 1;
   align-items: center;
   width: 100%;
+  top: 20px;
 `;
 
 export const ContainerBottom = styled.View`
@@ -26,12 +27,19 @@ export const TitleContainer = styled.View`
   align-items: flex-start;
   justify-content: center;
   width: 60%;
-  margin-bottom: 30px;
+`;
+
+export const MLogo = styled(Image)`
+  width: 100%;
+  height: 300px;
+  position: relative;
+  bottom: 90px;
 `;
 
 export const Title = styled.Text`
   font-size: 30px;
   color: #fcf9ff;
+  position: absolute;
 `;
 
 export const InputContainer = styled.View`
@@ -41,6 +49,7 @@ export const InputContainer = styled.View`
   width: 100%;
   margin-bottom: 10px;
   position: relative;
+  bottom: 60px;
 `;
 
 export const Input = styled.TextInput`
@@ -71,6 +80,7 @@ export const ButtonContainer = styled.View`
   justify-content: center;
   width: 100%;
   gap: 12px;
+  bottom: 60px;
 `;
 
 export const LoginButton = styled.TouchableOpacity`

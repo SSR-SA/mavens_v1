@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import { ReactComponent as mLogo } from "../../assets/mLogo.svg";
 
 export const Container = styled.View`
   flex: 1;

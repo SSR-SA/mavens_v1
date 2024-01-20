@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { ReactComponent as mLogo } from "../../assets/mLogo.svg";
+import { SvgUri } from "react-native-svg";
 
 export const Container = styled.View`
   flex: 1;
@@ -27,6 +27,12 @@ export const TitleContainer = styled.View`
   justify-content: center;
   width: 60%;
   margin-bottom: 30px;
+`;
+
+export const MLogo = styled(SvgUri)`
+  width: 100px;
+  height: 80px;
+  z-index: 100;
 `;
 
 export const Title = styled.Text`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardBackground = styled.View`
+export const CardBackground = styled.TouchableOpacity`
   background-color: #1d1d1d;
   width: 180px;
   height: 210px;

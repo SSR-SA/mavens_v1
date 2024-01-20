@@ -30,3 +30,7 @@ export const ContinueLearningCardContainer = styled.View`
   justify-content: space-between;
   align-items: flex-start;
 `;
+
+export const ButtonContainer = styled.TouchableOpacity`
+  padding-right: 20px;
+`;

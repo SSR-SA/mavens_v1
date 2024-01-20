@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { userLogin, userSignUp } from "../../requests/user";
@@ -20,6 +21,7 @@ import {
   LoginButtonText,
   SignUpButton,
   SignUpButtonText,
+  MLogo,
 } from "./signUp.styles";
 
 const SignUpPage = ({ navigation }) => {
@@ -35,7 +37,12 @@ const SignUpPage = ({ navigation }) => {
         return;
       }
 
-      const response = await userSignUp({ firstName, lastName, email, password });
+      const response = await userSignUp({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
 
       if (response) {
         navigation.navigate("Login");
@@ -57,7 +64,7 @@ const SignUpPage = ({ navigation }) => {
       <Container>
         <ContainerTop>
           <TitleContainer>
-            {/* <MContainer /> */}
+            <MLogo source={require("../../assets/MLogo/MLogo.svg")} />
             <Title>
               Empower{"\n"}Minds{"\n"}Ignite Learning
             </Title>
@@ -109,11 +116,17 @@ const SignUpPage = ({ navigation }) => {
           <TermsContainer>
             <Terms>
               {`By logging in you agree to our `}
-              <PrivacyLink onPress={() => Linking.openURL("www.killme.com/privacy-policy")}>
+              <PrivacyLink
+                onPress={() => Linking.openURL("www.killme.com/privacy-policy")}
+              >
                 privacy policy
               </PrivacyLink>
               {` and `}
-              <PrivacyLink onPress={() => Linking.openURL("www.killme.com/terms-of-service")}>
+              <PrivacyLink
+                onPress={() =>
+                  Linking.openURL("www.killme.com/terms-of-service")
+                }
+              >
                 terms of service
               </PrivacyLink>
             </Terms>
