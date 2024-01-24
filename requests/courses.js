@@ -35,3 +35,20 @@ export const GetCourseById = async (id, token) => {
 		throw error;
 	}
 };
+
+export const EnrollCourse = async (token, id) => {
+	try {
+		const response = await axios.post(`/api/course/subscribe/${id}`, null, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		if (response.status === 200 || response.status === 201) {
+			return response.data;
+		} else {
+			throw new Error(`Unexpected response status: ${response.status}`);
+		}
+	} catch (error) {
+		throw error;
+	}
+};

@@ -21,6 +21,7 @@ import ChatScreenPage from './routes/chat-screen/chat-screen.component.jsx';
 import UserBrowserPage from './routes/users/user-browser.component.jsx';
 import CourseDescriptionPage from './routes/courseDescription/courseDescription.component.jsx';
 import VideoPage from './routes/video/video.component.jsx';
+import CreateReviewPage from './routes/create-review/create-review.component.jsx';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -60,6 +61,11 @@ const App = () => {
 								<Stack.Screen name="ChatScreen" component={ChatScreenPage} />
 								<Stack.Screen name="UserBrowser" component={UserBrowserPage} />
 								<Stack.Screen name="VideoPage" component={VideoPage} />
+
+								<Stack.Screen
+									name="CreateReviewPage"
+									component={CreateReviewPage}
+								/>
 								<Stack.Screen
 									name="CourseDescriptionPage"
 									component={CourseDescriptionPage}
@@ -103,6 +109,10 @@ const App = () => {
 							<Stack.Screen name="ChatScreen" component={ChatScreenPage} />
 							<Stack.Screen name="UserBrowser" component={UserBrowserPage} />
 							<Stack.Screen name="VideoPage" component={VideoPage} />
+							<Stack.Screen
+								name="CreateReviewPage"
+								component={CreateReviewPage}
+							/>
 
 							<Stack.Screen
 								name="CourseDescriptionPage"

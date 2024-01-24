@@ -25,25 +25,29 @@ import {
 
 import CourseDescriptionAbout from '../../components/courseDescriptionAbout/courseDescriptionAbout.component';
 import CourseDescriptionLessons from '../../components/courseDescriptionLessons/courseDescriptionLessons.component';
+import CourseDescriptionReviews from '../../components/courseDescriptionReviews/courseDescriptionReviews.component';
 import {useAuth} from '../../context/authContext';
-import {GetCourseById} from '../../requests/courses';
+import {EnrollCourse, GetCourseById} from '../../requests/courses';
 import {useFocusEffect, useRoute} from '@react-navigation/native';
 
 const CourseDescriptionPage = ({navigation}) => {
 	const [activeTab, setActiveTab] = useState('about');
 	const [courseData, setCourseData] = useState('about');
+	const [isSubscribed, setIsSubscribed] = useState(false);
 	const {token} = useAuth();
 	const route = useRoute();
 	const {id} = route.params;
 
+	// courseData?.chapters[0].videoUrl
 	useFocusEffect(
 		React.useCallback(() => {
 			const fetchData = async () => {
 				try {
 					if (token) {
 						const result = await GetCourseById(id, token);
-						console.log(result);
 						setCourseData(result);
+						console.log(result.course.isSubscribed);
+						setIsSubscribed(result?.course?.isSubscribed);
 					}
 				} catch (error) {
 					console.error('Error fetching users:', error.message);
@@ -53,6 +57,14 @@ const CourseDescriptionPage = ({navigation}) => {
 			fetchData();
 		}, [token, id])
 	);
+
+	const handleEnrollment = async () => {
+		let response = await EnrollCourse(token, id);
+		if (response) {
+			setIsSubscribed(true);
+		}
+	};
+
 	const renderContent = () => {
 		switch (activeTab) {
 			case 'about':
@@ -67,7 +79,13 @@ const CourseDescriptionPage = ({navigation}) => {
 					/>
 				);
 			case 'reviews':
-				return <Text style={{color: '#fff'}}>Reviews Content</Text>;
+				return (
+					<View>
+						<CourseDescriptionReviews
+							ratings={courseData?.ratings ? courseData?.ratings : []}
+						/>
+					</View>
+				);
 			default:
 				return null;
 		}
@@ -117,11 +135,23 @@ const CourseDescriptionPage = ({navigation}) => {
 			<CallToAction>
 				<PriceContainer>
 					<TotalPrice>Total Price</TotalPrice>
-					<Amount>${courseData?.course?.price}</Amount>
+					<Amount>
+						{isSubscribed ? 'Owned' : '$' + courseData?.course?.price}
+					</Amount>
 				</PriceContainer>
-				<EnrollButton onPress={() => {}}>
-					<ButtonText>Enroll Now</ButtonText>
-				</EnrollButton>
+				{isSubscribed ? (
+					<EnrollButton
+						onPress={() =>
+							navigation.navigate('CreateReviewPage', {courseId: id})
+						}
+					>
+						<ButtonText>Review</ButtonText>
+					</EnrollButton>
+				) : (
+					<EnrollButton onPress={handleEnrollment}>
+						<ButtonText>Enroll Now</ButtonText>
+					</EnrollButton>
+				)}
 			</CallToAction>
 		</CoursePageContainer>
 	);
