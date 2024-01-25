@@ -58,18 +58,14 @@ export const createCourse = async (token, formData) => {
 		if (!formData || formData.size === 0) {
 			throw 'No data provided';
 		}
-		console.log(formData);
-		const response = await fetch(`http://192.168.1.56:8000/api/course`, {
-			method: 'POST',
+		const response = await axios.post(`/api/course`, formData, {
 			headers: {
+				'Content-Type': 'multipart/form-data',
 				Authorization: `Bearer ${token}`,
 			},
-			body: formData,
 		});
-		console.log(data);
-		const data = await response.json();
-		if (response.ok) {
-			return data.data;
+		if (response.status === 200 || response.status === 201) {
+			return response.data;
 		} else {
 			throw new Error(`Unexpected response status: ${response.status}`);
 		}

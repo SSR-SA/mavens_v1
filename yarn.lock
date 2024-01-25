@@ -1855,6 +1855,10 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
+"@react-native-picker/picker@react-native-picker/picker":
+  version "2.6.1"
+  resolved "https://codeload.github.com/react-native-picker/picker/tar.gz/8668dceefecfba29816d76079c1a255a4d9a6616"
+
 "@react-native/assets-registry@^0.73.1":
   version "0.73.1"
   resolved "https://registry.yarnpkg.com/@react-native/assets-registry/-/assets-registry-0.73.1.tgz#e2a6b73b16c183a270f338dc69c36039b3946e85"

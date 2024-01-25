@@ -26,6 +26,7 @@ import {
 } from './courseCreation.styles';
 import {useAuth} from '../../context/authContext';
 import {createCourse} from '../../requests/courses';
+import ImagePicker from 'react-native-image-picker';
 
 const CourseCreationPage = ({navigation}) => {
 	const [title, setTitle] = useState('');
@@ -42,7 +43,14 @@ const CourseCreationPage = ({navigation}) => {
 				return;
 			}
 			const formData = new FormData();
-			formData.append('file', image);
+			formData.append('file', {
+				uri:
+					Platform.OS === 'android'
+						? image.uri
+						: image.uri.replace('file://', ''),
+				type: 'image/jpeg',
+				name: image.name,
+			});
 			formData.append('title', title);
 			formData.append('description', description);
 			formData.append('price', price);
@@ -52,6 +60,7 @@ const CourseCreationPage = ({navigation}) => {
 				setTitle('');
 				setPrice('');
 				setCategory('');
+				setDescription('');
 				setImage(null);
 				alert('Course created successfully!');
 			} else {
@@ -67,6 +76,7 @@ const CourseCreationPage = ({navigation}) => {
 		try {
 			const result = await DocumentPicker.getDocumentAsync();
 			if (result.canceled == false) {
+				console.log(result.assets[0]);
 				setImage(result.assets[0]);
 			} else {
 				console.log('Document picking cancelled.');
