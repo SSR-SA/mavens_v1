@@ -1,4 +1,3 @@
-// CourseCreationPage.styles.js
 import styled from 'styled-components/native';
 import {SvgUri} from 'react-native-svg';
 
