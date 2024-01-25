@@ -67,3 +67,24 @@ export const CreateButtonText = styled.Text`
 	color: #1d1d1d;
 	font-size: 14px;
 `;
+
+export const CustomButton = styled.TouchableOpacity`
+	background-color: #808080;
+	padding: 5px 15px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	width: 80%;
+	flex-direction: row;
+	align-items: center;
+`;
+
+export const CreateChapter = styled.TouchableOpacity`
+	align-items: center;
+	padding: 6px;
+	width: 80%;
+	border-radius: 5px;
+`;
+
+export const CreateChapterText = styled.Text`
+	color: #6b6b6b;
+`;
