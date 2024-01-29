@@ -1,6 +1,6 @@
 // CourseChapterCreationPage.jsx
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, ScrollView, Text} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {
 	Container,
 	TitleContainer,
@@ -13,7 +13,6 @@ import {
 	DropdownContainer,
 } from './createChapter.styles';
 import {useAuth} from '../../context/authContext';
-import {getUserCourses} from '../../requests/courses';
 import {Picker} from '@react-native-picker/picker';
 import {useFocusEffect} from '@react-navigation/native';
 
@@ -44,7 +43,7 @@ const CreateChapterPage = ({navigation}) => {
 	const [description, setDescription] = useState('');
 	const [videoUrl, setVideoUrl] = useState('');
 	const [studyTime, setStudyTime] = useState('');
-	const [selectedCourse, setSelectedCourse] = useState('');
+	const [selectedCourse, setSelectedCourse] = useState('Java');
 	const [userCourses, setUserCourses] = useState([]);
 	const {token} = useAuth();
 
@@ -108,20 +107,16 @@ const CreateChapterPage = ({navigation}) => {
 					/>
 					<DropdownContainer>
 						<Text style={{color: '#fcf9ff'}}>Select Course:</Text>
-						<Picker
-							selectedValue={selectedCourse}
-							onValueChange={(itemValue) => setSelectedCourse(itemValue)}
-							style={{width: '100%', color: '#a0a0a0'}}
-						>
-							<Picker.Item label="Select a Course" value="" />
-							{userCourses.map((course) => (
-								<Picker.Item
-									key={course._id}
-									label={course.title}
-									value={course._id}
-								/>
-							))}
-						</Picker>
+						<View>
+							<Picker
+								selectedValue={'Pikachu'}
+								onValueChange={setSelectedCourse(selectedValue)}
+							>
+								<Picker.Item label="Pikachu" value="pikachu" />
+								<Picker.Item label="Charmander" value="charmander" />
+								<Picker.Item label="Squirtle" value="Squirtle" />
+							</Picker>
+						</View>
 					</DropdownContainer>
 				</InputContainer>
 				<ButtonContainer>

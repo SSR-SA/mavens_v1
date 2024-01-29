@@ -24,6 +24,7 @@
 			"supportsTablet": true
 		},
 		"android": {
+			"supportsRtl": true,
 			"permissions": ["READ_EXTERNAL_STORAGE"],
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptive-icon.png",
