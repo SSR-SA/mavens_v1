@@ -1,27 +1,21 @@
+// SignUpPage.js
 import React, { useState } from "react";
-
 import { Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { userLogin, userSignUp } from "../../requests/user";
-
+import { userSignUp } from "../../requests/user";
 import {
   Container,
   ContainerTop,
   ContainerBottom,
   TitleContainer,
-  MContainer,
   Title,
   InputContainer,
   ButtonContainer,
   Input,
-  TermsContainer,
-  Terms,
-  PrivacyLink,
-  LoginButton,
-  LoginButtonText,
   SignUpButton,
   SignUpButtonText,
-  MLogo,
+  LoginButton,
+  LoginButtonText,
 } from "./signUp.styles";
 
 const SignUpPage = ({ navigation }) => {
@@ -64,7 +58,6 @@ const SignUpPage = ({ navigation }) => {
       <Container>
         <ContainerTop>
           <TitleContainer>
-            <MLogo source={require("../../assets/MLogo/MLogo.svg")} />
             <Title>
               Empower{"\n"}Minds{"\n"}Ignite Learning
             </Title>
@@ -113,24 +106,7 @@ const SignUpPage = ({ navigation }) => {
         </ContainerTop>
 
         <ContainerBottom>
-          <TermsContainer>
-            <Terms>
-              {`By logging in you agree to our `}
-              <PrivacyLink
-                onPress={() => Linking.openURL("www.killme.com/privacy-policy")}
-              >
-                privacy policy
-              </PrivacyLink>
-              {` and `}
-              <PrivacyLink
-                onPress={() =>
-                  Linking.openURL("www.killme.com/terms-of-service")
-                }
-              >
-                terms of service
-              </PrivacyLink>
-            </Terms>
-          </TermsContainer>
+          {/* Add your TermsContainer, Terms, PrivacyLink here */}
         </ContainerBottom>
       </Container>
     </SafeAreaView>

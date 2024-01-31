@@ -1,18 +1,18 @@
-import {SafeAreaView} from 'react-native-safe-area-context';
-import React from 'react';
-import Video from 'react-native-video';
-import {View} from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
+import Video from "react-native-video";
+import { View } from "react-native";
 
 const VideoPage = () => {
-	return (
-		<View>
-			{/* <Video
+  return (
+    <View>
+      {/* <Video
 				source={{
-					uri: `http://192.168.1.56:8000/videos/0c39d06e0143e2e716f8665c36087337.mp4`,
+					uri: `http://192.168.147.1051.56:8000/videos/0c39d06e0143e2e716f8665c36087337.mp4`,
 				}}
 			/> */}
-		</View>
-	);
+    </View>
+  );
 };
 
 export default VideoPage;
