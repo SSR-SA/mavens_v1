@@ -4,10 +4,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const Container = styled.View`
   display: flex;
-  flex-direction: row;
-  border: 1px solid #1d1d1d;
-  border-radius: 10px;
-  background-color: #111313;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const ReviewContainer = styled.View`
@@ -15,7 +13,10 @@ export const ReviewContainer = styled.View`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 10px;
+  border: 1px solid #1d1d1d;
+  background-color: #111313;
+  border-radius: 10px;
+  gap: 20px;
   width: 100%;
   padding: 10px;
 `;

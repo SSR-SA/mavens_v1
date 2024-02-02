@@ -95,7 +95,7 @@ const CourseDescriptionPage = ({ navigation }) => {
     <CoursePageContainer>
       <CourseThumbnail
         source={{
-          uri: `http://192.168.147.105:8000/uploads/${courseData?.course?.imageUrl}`,
+          uri: `http://192.168.0.11:8000/uploads/${courseData?.course?.imageUrl}`,
         }}
       />
       <CourseDescriptionContainer>

@@ -1,6 +1,6 @@
 // CourseDescriptionReviews.js
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native"; // Import ScrollView
 import * as CourseDescriptionReviewsStyles from "./courseDescriptionReviews.styles";
 
 const renderStars = (rating) => {
@@ -19,30 +19,32 @@ const renderStars = (rating) => {
 
 const CourseDescriptionReviews = ({ ratings }) => {
   return (
-    <CourseDescriptionReviewsStyles.Container>
-      {ratings.map((review, index) => (
-        <CourseDescriptionReviewsStyles.ReviewContainer key={index}>
-          <CourseDescriptionReviewsStyles.UserContainer>
-            <CourseDescriptionReviewsStyles.ProfileImage
-              source={{ uri: review.createdBy.profileImage }}
-            />
-            <CourseDescriptionReviewsStyles.UserInfo>
-              <CourseDescriptionReviewsStyles.UserName>
-                {review.createdBy.firstName}
-              </CourseDescriptionReviewsStyles.UserName>
-              <CourseDescriptionReviewsStyles.RatingContainer>
-                {renderStars(review.rating)}
-              </CourseDescriptionReviewsStyles.RatingContainer>
-            </CourseDescriptionReviewsStyles.UserInfo>
-          </CourseDescriptionReviewsStyles.UserContainer>
-          <CourseDescriptionReviewsStyles.ReviewContent>
-            <CourseDescriptionReviewsStyles.ReviewText>
-              {review.text}
-            </CourseDescriptionReviewsStyles.ReviewText>
-          </CourseDescriptionReviewsStyles.ReviewContent>
-        </CourseDescriptionReviewsStyles.ReviewContainer>
-      ))}
-    </CourseDescriptionReviewsStyles.Container>
+    <ScrollView>
+      <CourseDescriptionReviewsStyles.Container>
+        {ratings.map((review, index) => (
+          <CourseDescriptionReviewsStyles.ReviewContainer key={index}>
+            <CourseDescriptionReviewsStyles.UserContainer>
+              <CourseDescriptionReviewsStyles.ProfileImage
+                source={{ uri: review.createdBy.profileImage }}
+              />
+              <CourseDescriptionReviewsStyles.UserInfo>
+                <CourseDescriptionReviewsStyles.UserName>
+                  {review.createdBy.firstName}
+                </CourseDescriptionReviewsStyles.UserName>
+                <CourseDescriptionReviewsStyles.RatingContainer>
+                  {renderStars(review.rating)}
+                </CourseDescriptionReviewsStyles.RatingContainer>
+              </CourseDescriptionReviewsStyles.UserInfo>
+            </CourseDescriptionReviewsStyles.UserContainer>
+            <CourseDescriptionReviewsStyles.ReviewContent>
+              <CourseDescriptionReviewsStyles.ReviewText>
+                {review.text}
+              </CourseDescriptionReviewsStyles.ReviewText>
+            </CourseDescriptionReviewsStyles.ReviewContent>
+          </CourseDescriptionReviewsStyles.ReviewContainer>
+        ))}
+      </CourseDescriptionReviewsStyles.Container>
+    </ScrollView>
   );
 };
 

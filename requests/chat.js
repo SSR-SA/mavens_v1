@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://192.168.147.105:8000";
+axios.defaults.baseURL = "http://192.168.0.11:8000";
 
 export const GetChat = async (token) => {
   try {
